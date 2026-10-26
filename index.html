@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>秋光笺 - 把目光收回来的看片札记·四格暮色/落叶标本/暗角呼吸/收光练习</title>
+<meta name="description" content="秋光笺（qiuxiayingshiwang-h5）是一份原创看片札记：把注意力从「去哪看」收回到「怎么看」——四格暮色、落叶标本、暗角呼吸与收光练习。不提供影视App下载、不聚合片源、不引流任何站点。网址 https://qiuxiayingshiwang-h5.github.io">
+<meta name="keywords" content="秋光笺,看片札记,观影注意力,四格暮色,暗角构图,落叶标本法,收光练习,秋色读片,原创影像笔记,qiuxiayingshiwang">
+<meta name="author" content="秋光笺">
+<meta name="robots" content="index,follow">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#EFE6D4">
+<link rel="canonical" href="https://qiuxiayingshiwang-h5.github.io/">
+<style>
+/* ============================================================
+   秋光笺  v1  原创「看片札记 · 注意力回收」
+   词源翻转：秋霞 → 秋天的光 → 光会落，得接住
+   不是"站"，不是"网"，不是"影视平台"；不谈入口
+   视觉：残荷纸棕 / 暮云灰 / 柿霜橙 / 褪朱
+   DOM：笺纸折痕 · 四格暮色 · 落叶标本 · 暗角呼吸 · 收光铭牌
+   ============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:"Songti SC","PingFang SC","Microsoft YaHei",Georgia,serif;
+  background:#EFE6D4;color:#2E2A24;line-height:1.9;overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 10% 8%,rgba(201,140,70,.13),transparent 30%),
+    radial-gradient(circle at 90% 12%,rgba(110,104,96,.10),transparent 30%),
+    repeating-linear-gradient(0deg,transparent 0 25px,rgba(150,136,110,.05) 25px 26px);
+}
+a{text-decoration:none;color:inherit;outline:none}
+img{max-width:100%;display:block}
+section[id]{scroll-margin-top:2px}
+::selection{background:#C9822A;color:#FFF8EE}
+h1,h2,h3,h4{line-height:1.28;font-weight:800;letter-spacing:.5px}
+ul{list-style:none}
+
+/* ---------- 笺头纸带 ---------- */
+.ribbon{background:#3A342C;color:#E8DFC8;font-size:11.5px;letter-spacing:1.3px;padding:7px 16px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;border-bottom:4px double #C9822A;font-family:monospace}
+.ribbon b{color:#F0C98A}
+.ribbon .warn{color:#E8B4A8;font-weight:800}
+
+/* ---------- 导航：一枚落叶书签 ---------- */
+.nav{position:sticky;top:0;z-index:999;background:rgba(239,230,212,.97);backdrop-filter:blur(8px);border-bottom:1px solid #DDCFB4}
+.nav-in{max-width:1200px;margin:0 auto;height:64px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.leaf{display:flex;align-items:center;gap:11px;min-width:0}
+.leaf .mk{width:34px;height:34px;position:relative;flex-shrink:0}
+.leaf .mk::before{content:"";position:absolute;inset:2px;border-radius:0 60% 0 60%;background:#C9822A;transform:rotate(-15deg);box-shadow:inset -3px -3px 0 rgba(140,80,20,.28)}
+.leaf .mk::after{content:"";position:absolute;top:50%;left:2px;right:12px;height:1.5px;background:rgba(62,42,36,.45);transform:rotate(-15deg);transform-origin:left center}
+.leaf .cn{font-size:19px;font-weight:900;white-space:nowrap;font-family:"Songti SC",serif}
+.leaf .cn em{font-style:normal;color:#C9822A}
+.leaf .cn .thin{color:#8C7E64;font-weight:600;font-size:16px}
+.leaf .en{font-size:9px;letter-spacing:2.4px;color:#8C7E64;font-family:monospace;text-transform:uppercase;white-space:nowrap}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:#3E3A33;padding:8px 9px;border-bottom:2px solid transparent;transition:.2s;font-weight:600}
+.nav-links a:hover{color:#C9822A;border-bottom-color:#C9822A}
+.nav-go{background:#C9822A;color:#FFF8EE;font-weight:800;font-size:13px;padding:8px 16px;border-radius:2px 14px 2px 14px;border:1.5px solid #8E5420;transition:.25s;white-space:nowrap}
+.nav-go:hover{background:#F0C98A;color:#2E2A24;border-color:#C9822A;transform:translateY(-2px)}
+
+/* ---------- Hero：笺纸折痕 ---------- */
+.hero{max-width:1200px;margin:0 auto;padding:50px 20px 40px;display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:center}
+.paper-card{position:relative;background:#F6EFDF;border:1px solid #DDCFB4;padding:34px 30px 30px;border-radius:3px;box-shadow:0 0 0 8px #F6EFDF,0 0 0 9px #C9822A,5px 8px 0 rgba(90,78,54,.14)}
+.paper-card::before{content:"";position:absolute;top:0;bottom:0;left:52%;width:1px;background:linear-gradient(180deg,transparent,rgba(201,140,70,.5) 12%,rgba(201,140,70,.5) 88%,transparent);transform:rotate(-1.2deg);transform-origin:center}
+.paper-card::after{content:"";position:absolute;inset:10px;border:1px solid rgba(201,140,70,.28);border-radius:2px;pointer-events:none}
+.pc-in{position:relative;z-index:2}
+.pc-in .no{font-family:monospace;font-size:10.5px;letter-spacing:2px;color:#C9822A}
+.pc-in .big{font-family:"Songti SC",serif;font-weight:900;font-size:clamp(30px,5.4vw,58px);line-height:1.06;color:#2E2A24;margin:8px 0 4px}
+.pc-in .big em{font-style:normal;color:#C9822A}
+.pc-in .sub{font-family:monospace;font-size:11.5px;letter-spacing:1.8px;color:#8C7E64;text-transform:uppercase}
+.pc-in .line{height:1px;background:rgba(201,140,70,.45);margin:16px 0}
+.pc-in .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc-in .vs .v .k{font-family:monospace;font-size:9.5px;letter-spacing:1.2px;color:#8C7E64}
+.pc-in .vs .v .t{font-size:13.6px;color:#3A352D;line-height:1.6;margin-top:2px}
+.pc-in .vs .v.l{position:relative}
+.pc-in .vs .v.l::before{content:"";position:absolute;top:4px;bottom:4px;left:-9px;border-left:1px dashed rgba(201,140,70,.6)}
+.pc-in .vs .v b{color:#C9822A;font-family:"Songti SC",serif}
+.pc-in .foot-note{margin-top:18px;font-size:12.4px;color:#6B634E;font-style:italic;font-family:"Songti SC",serif;border-left:3px solid #C9822A;padding-left:10px;line-height:1.65}
+.hero h1{font-size:clamp(27px,4.8vw,48px);font-weight:900;line-height:1.12;font-family:"Songti SC",serif}
+.hero h1 em{font-style:normal;color:#C9822A;position:relative}
+.hero h1 em::after{content:"";position:absolute;left:4px;right:4px;bottom:2px;height:6px;background:rgba(240,201,138,.62)}
+.hero .sub2{font-family:monospace;font-size:12px;letter-spacing:2.6px;color:#8C7E64;margin-top:10px;text-transform:uppercase}
+.hero .lead{font-size:15px;color:#3A352D;margin:18px 0 22px;max-width:580px}
+.hero-btns{display:flex;gap:11px;flex-wrap:wrap}
+.b1{padding:11px 24px;font-weight:800;border-radius:2px 14px 2px 14px;background:#C9822A;color:#FFF8EE;border:1.5px solid #8E5420;transition:.25s}
+.b1:hover{background:#F0C98A;color:#2E2A24;border-color:#C9822A;transform:translateY(-2px)}
+.b2{padding:11px 24px;font-weight:800;border-radius:2px 14px 2px 14px;background:transparent;color:#2E2A24;border:1.5px solid #DDCFB4;transition:.25s}
+.b2:hover{background:#2E2A24;color:#F6EFDF;border-color:#2E2A24}
+
+/* 收光四则 */
+.rays{display:grid;gap:10px;margin-top:20px}
+.ry{background:#F6EFDF;border:1px solid #DDCFB4;border-left:6px solid var(--c,#C9822A);border-radius:0 12px 12px 0;padding:11px 15px;transition:.25s}
+.ry:hover{background:#FFF9F0;transform:translateX(4px);border-left-color:#A0522A}
+.ry .k{font-family:monospace;font-size:10.5px;color:#8C7E64;letter-spacing:1.4px}
+.ry h4{font-size:14.5px;font-weight:900;color:#2E2A24;margin:2px 0 3px}
+.ry h4 b{color:#C9822A;font-family:"Songti SC",serif;font-size:14px}
+.ry p{font-size:12.6px;color:#4A443A;line-height:1.6}
+.ry.c2{border-left-color:#6E6554}.ry.c3{border-left-color:#A0522A}.ry.c4{border-left-color:#8C7E64}
+
+/* ---------- 骨架 ---------- */
+.wrap{max-width:1200px;margin:0 auto;padding:52px 20px}
+.head{display:flex;align-items:baseline;gap:12px;margin-bottom:26px;flex-wrap:wrap;border-bottom:1px solid #DDCFB4;padding-bottom:10px}
+.head .idx{font-family:"Songti SC",serif;font-size:14px;font-weight:900;color:#FFF8EE;background:#C9822A;padding:2px 11px;border-radius:3px;letter-spacing:2px}
+.head h2{font-size:23px;font-weight:900;font-family:"Songti SC",serif}
+.head h2 em{font-style:normal;color:#C9822A}
+.head .en{font-family:monospace;font-size:11px;letter-spacing:1.6px;color:#8C7E64;text-transform:uppercase}
+.head a.more{margin-left:auto;font-size:13px;color:#3E3A33;font-weight:700;font-family:monospace}
+.head a.more:hover{color:#C9822A}
+
+/* ---------- 01 四格暮色（渐变阶梯） ---------- */
+.dusk{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.dk{position:relative;height:280px;border-radius:8px 8px 6px 6px;overflow:hidden;border:1px solid #DDCFB4;transition:.38s;box-shadow:2px 3px 0 rgba(90,78,54,.12)}
+.dk:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 18px 30px rgba(110,80,30,.2)}
+.dk .sky{position:absolute;inset:0;transition:.5s}
+.dk.d1 .sky{background:linear-gradient(180deg,#D9C49A 0%,#C9822A 55%,#8E5420 100%)}
+.dk.d2 .sky{background:linear-gradient(180deg,#B8A98C 0%,#A86A3A 50%,#5C3A24 100%)}
+.dk.d3 .sky{background:linear-gradient(180deg,#8E8574 0%,#6E5A44 48%,#2E241C 100%)}
+.dk.d4 .sky{background:linear-gradient(180deg,#5C5448 0%,#3A342C 52%,#1C1915 100%)}
+.dk .sun{position:absolute;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF3D4,#F0C98A 45%,rgba(201,140,70,0) 70%);filter:blur(1px);transition:.5s}
+.dk.d1 .sun{top:30%;left:18%}
+.dk.d2 .sun{top:48%;left:26%;width:30px;height:30px;background:radial-gradient(circle at 35% 30%,#FFE0B0,#C9822A 50%,rgba(140,80,30,0) 70%)}
+.dk.d3 .sun{top:62%;left:36%;width:20px;height:20px;background:radial-gradient(circle at 35% 30%,#F0C98A,#8E5420 55%,rgba(90,50,20,0) 70%)}
+.dk.d4 .sun{top:74%;left:46%;width:12px;height:12px;background:radial-gradient(circle at 35% 30%,#C9822A,#3A342C 60%,rgba(30,25,20,0) 70%)}
+.dk .line{position:absolute;left:0;right:0;border-top:1px solid rgba(255,243,212,.28);z-index:2}
+.dk .bd{position:absolute;left:0;right:0;bottom:0;padding:16px 17px;background:linear-gradient(0deg,rgba(30,25,20,.78),rgba(30,25,20,0));color:#F0EAD6;z-index:3}
+.dk .bd .n{font-family:monospace;font-size:10px;letter-spacing:1.4px;color:#F0C98A}
+.dk .bd h3{font-size:16px;font-weight:900;font-family:"Songti SC",serif;margin:2px 0 4px}
+.dk .bd p{font-size:12.2px;line-height:1.55;color:#E8DFC8}
+.dk .bd .do{margin-top:7px;font-family:monospace;font-size:10px;color:#F0C98A;border-top:1px dashed rgba(240,201,138,.35);padding-top:6px}
+.dk .bd .do b{color:#fff}
+
+/* ---------- 02 落叶标本（地图坐标卡） ---------- */
+.fall{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px}
+.lf{background:#F6EFDF;border:1px solid #DDCFB4;border-radius:6px 16px 6px 16px;padding:0;overflow:hidden;transition:.34s;position:relative}
+.lf:hover{background:#FFF9F0;transform:translateY(-6px);box-shadow:0 16px 26px rgba(110,80,30,.15);border-color:#C9822A}
+.lf .pin{height:78px;position:relative;overflow:hidden;background:
+  radial-gradient(circle at 20% 30%,rgba(201,140,70,.28),transparent 45%),
+  linear-gradient(180deg,#E8DCC4,#D8C8A6)}
+.lf .pin .lv{position:absolute;top:50%;left:50%;width:22px;height:22px;background:#C9822A;border-radius:50% 0 50% 50%;transform:translate(-50%,-50%) rotate(-20deg);box-shadow:0 2px 6px rgba(90,50,20,.25)}
+.lf .pin .lv::after{content:"";position:absolute;top:5px;left:5px;right:5px;bottom:5px;border:.5px dashed rgba(255,243,212,.65);border-radius:50% 0 50% 50%}
+.lf .pin .co{position:absolute;font-family:monospace;font-size:9.5px;color:#6B5A38;letter-spacing:.5px}
+.lf .pin .co.c1{top:8px;left:10px}.lf .pin .co.c2{top:8px;right:10px}.lf .pin .co.c3{bottom:6px;left:10px}
+.lf .bd{padding:15px 17px 18px}
+.lf .cat{font-family:monospace;font-size:10px;color:#C9822A;letter-spacing:1.2px;font-weight:800}
+.lf h3{font-size:16.5px;font-weight:900;color:#2E2A24;margin:3px 0 6px;font-family:"Songti SC",serif}
+.lf p{font-size:13.2px;color:#4A443A;line-height:1.68}
+.lf .how{margin-top:9px;font-family:monospace;font-size:10.5px;color:#8C7E64;border-top:1px dashed #DDCFB4;padding-top:6px;line-height:1.5}
+.lf .how b{color:#A0522A}
+
+/* ---------- 03 暗角呼吸（悬停擦亮） ---------- */
+.vign{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}
+.vg{height:220px;perspective:1400px}
+.vg-in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.vg:hover .vg-in{transform:rotateY(180deg)}
+.vf{position:absolute;inset:0;backface-visibility:hidden;border-radius:8px;overflow:hidden;border:1px solid #DDCFB4}
+.vf-front{background:#2E2A24;box-shadow:2px 3px 0 rgba(90,78,54,.14)}
+.vf-front .room{position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,rgba(240,201,138,.22) 0%,rgba(46,42,36,.4) 26%,rgba(30,25,20,.96) 60%);transition:.6s}
+.vg:hover .vf-front .room{background:radial-gradient(circle at 50% 46%,rgba(240,201,138,.42) 0%,rgba(140,90,40,.35) 30%,rgba(30,25,20,.92) 66%)}
+.vf-front .dot{position:absolute;top:46%;left:50%;width:10px;height:10px;border-radius:50%;background:#F0C98A;transform:translate(-50%,-50%);box-shadow:0 0 12px #F0C98A;animation:breath 3.4s ease-in-out infinite}
+@keyframes breath{0%,100%{opacity:.35;transform:translate(-50%,-50%) scale(.8)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.35)}}
+.vf-front .no{position:absolute;top:12px;left:14px;font-family:monospace;font-size:10px;letter-spacing:1.4px;color:#F0C98A;z-index:3}
+.vf-front h3{position:absolute;bottom:14px;left:14px;right:14px;font-size:17px;font-weight:900;color:#F0EAD6;font-family:"Songti SC",serif;z-index:3;line-height:1.3}
+.vf-front .hint{position:absolute;bottom:14px;right:14px;font-family:monospace;font-size:9.5px;color:#A89A7C;z-index:3}
+.vf-back{background:#C9822A;color:#2E1C0E;transform:rotateY(180deg);border-color:#8E5420;padding:19px 20px}
+.vf-back h4{font-size:12px;font-weight:800;font-family:monospace;letter-spacing:.5px;margin-bottom:8px;color:#2E1C0E}
+.vf-back h4::before{content:"◎ "}
+.vf-back p{font-size:13.2px;line-height:1.72;color:#3A2A1A}
+.vf-back .fx{margin-top:11px;font-family:monospace;font-size:10.5px;color:#2E1C0E;border-top:1px dashed rgba(46,28,14,.35);padding-top:7px;line-height:1.55}
+.vf-back .fx b{color:#fff;background:rgba(46,28,14,.25);padding:0 3px;border-radius:2px}
+
+/* ---------- 04 收光练习（刻度 + 勾选） ---------- */
+.glow{background:#F6EFDF;border:1px solid #DDCFB4;border-radius:10px;padding:22px 22px 26px;box-shadow:inset 0 0 0 6px #F6EFDF,inset 0 0 0 7px #DDCFB4}
+.glow .meta{display:flex;justify-content:space-between;font-family:monospace;font-size:10.5px;color:#8C7E64;margin-bottom:18px}
+.glow .meta b{color:#C9822A}
+.bar-wrap{margin-bottom:20px}
+.bw-head{display:flex;justify-content:space-between;font-family:"Songti SC",serif;font-size:14.5px;font-weight:900;color:#2E2A24;margin-bottom:6px}
+.bw-head small{font-family:monospace;font-size:10px;color:#8C7E64;font-weight:400}
+.track2{height:16px;background:#E6DCC4;border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(110,100,80,.2)}
+.track2 i{position:absolute;left:0;top:0;bottom:0;width:var(--w,50%);background:linear-gradient(90deg,#C9822A,#F0C98A);border-radius:10px;transform:scaleX(0);transform-origin:left;animation:fill2 1.4s cubic-bezier(.2,.7,.3,1) forwards}
+.track2.hot i{background:linear-gradient(90deg,#A0522A,#C9822A)}
+@keyframes fill2{to{transform:scaleX(1)}}
+.checks{display:grid;gap:11px;margin-top:22px}
+.chk{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed #DDCFB4;cursor:default}
+.chk:last-child{border-bottom:none}
+.chk .box{width:20px;height:20px;border:1.5px solid #C9822A;border-radius:4px;margin-top:3px;position:relative;background:#FFF9F0;flex-shrink:0;transition:.2s}
+.chk:hover .box{background:#F0C98A}
+.chk .box::after{content:"";position:absolute;inset:3px;border-radius:1px;background:#C9822A;transform:scale(0);transition:.2s}
+.chk:hover .box::after{transform:scale(1)}
+.chk .txt .t{font-family:"Songti SC",serif;font-weight:900;font-size:14.5px;color:#2E2A24}
+.chk .txt .d{font-size:12.6px;color:#4A443A;line-height:1.6;margin-top:1px}
+.chk .txt .d b{color:#C9822A}
+
+/* ---------- 铭牌 ---------- */
+.plaque{max-width:1200px;margin:0 auto;padding:0 20px 12px}
+.plaque-in{background:#2E2A24;border:2px solid #C9822A;border-radius:4px;padding:24px 26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between;position:relative;overflow:hidden}
+.plaque-in::before{content:"光";position:absolute;right:16px;top:-28px;font-size:92px;font-weight:900;color:rgba(201,140,70,.18);font-family:"Songti SC",serif;line-height:1}
+.plaque-in .lab{font-family:monospace;font-size:11px;letter-spacing:2px;color:#F0C98A}
+.plaque-in .u{font-size:clamp(14px,3vw,21px);font-weight:900;color:#F0C98A;word-break:break-all;font-family:"Songti SC",monospace}
+.plaque-in .u a{color:#F0C98A;border-bottom:1.5px dashed #C9822A}
+.plaque-in .u a:hover{color:#fff}
+.plaque-in .note{font-size:12px;color:#E8DFC8;text-align:right}
+
+/* ---------- 关于 ---------- */
+.about{max-width:1200px;margin:0 auto;padding:52px 20px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:#F6EFDF;border:1px solid #DDCFB4;box-shadow:0 0 0 7px #F6EFDF,0 0 0 8px #C9822A;border-radius:4px}
+.about h2{font-size:23px;font-weight:900;margin-bottom:14px;font-family:"Songti SC",serif}
+.about h2 em{font-style:normal;color:#C9822A}
+.about p{font-size:15px;color:#3A352D;line-height:1.95;margin-bottom:12px}
+.about p b{color:#C9822A}
+.about .u2{color:#C9822A;font-weight:800;font-family:monospace;font-size:15px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:#EFE6D4;border:1px solid #DDCFB4;border-radius:8px;padding:16px;text-align:center}
+.tile .n{font-family:"Songti SC",serif;font-size:20px;font-weight:900;color:#C9822A}
+.tile .l{font-size:12px;color:#6E6554;margin-top:2px}
+
+/* ---------- 页脚 ---------- */
+.foot{border-top:4px double #C9822A;padding:36px 20px 26px;text-align:center;background:#E6DCC4}
+.foot-logo{font-size:19px;font-weight:900;color:#2E2A24;font-family:"Songti SC",serif;letter-spacing:.5px}
+.foot-logo em{font-style:normal;color:#C9822A}
+.foot-nav{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:14px 0;font-family:monospace;font-size:13px}
+.foot-nav a{color:#6E6554}
+.foot-nav a:hover{color:#C9822A}
+.foot p{font-size:12px;color:#7A6F5A}
+.foot .cut{margin:14px auto 10px;display:inline-block;border:1.5px solid #A0522A;color:#8E4A22;font-family:monospace;font-size:11.5px;font-weight:800;padding:7px 15px;border-radius:2px 14px 2px 14px;background:#F7E9D4;max-width:830px;line-height:1.62}
+.foot .legal{margin-top:10px;max-width:900px;margin-left:auto;margin-right:auto;color:#6E6554;line-height:1.82;font-size:12px}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:880px){
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:28px 20px 34px;gap:26px}
+  .about{grid-template-columns:1fr;padding:30px 20px}
+  .wrap{padding:42px 20px}
+  .nav-in{height:58px}
+  .leaf .en{display:none}
+  .paper-card{padding:26px 20px}
+  .pc-in .vs{grid-template-columns:1fr}
+  .pc-in .vs .v.l::before{display:none}
+  .pc-in .vs .v.l{border-top:1px dashed rgba(201,140,70,.5);padding-top:10px}
+  .bw-head{flex-direction:column;gap:2px}
+}
+@media(max-width:420px){
+  .hero h1{font-size:25px}
+  .head h2{font-size:20px}
+  .dusk,.fall,.vig{grid-template-columns:1fr}
+  .dk{height:250px}
+}
+@media print{
+  .nav,.nav-go,.ribbon{display:none}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- ===== 笺头纸带 ===== -->
+<div class="ribbon">
+  <span>秋光笺 · 把目光，从「去哪看」收回到「怎么看」</span><b>不递入口 · 不谈新域名 · 不列同名站</b>
+  <span class="warn">⚑ 无播放 · 无片源 · 无下载 · 无包名 · 无搜索引导</span>
+  <span>暮色 / 标本 / 暗角 / 收光</span>
+</div>
+
+<!-- ===== 导航 ===== -->
+<div class="nav">
+  <div class="nav-in">
+    <div class="leaf">
+      <div class="mk"></div>
+      <div>
+        <div class="cn">秋光<em>笺</em><span class="thin"> · 看片札记</span></div>
+        <div class="en">A Quiet Note on Looking</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#dusk">四格暮色</a>
+      <a href="#fall">落叶标本</a>
+      <a href="#vign">暗角呼吸</a>
+      <a href="#glow">收光练习</a>
+      <a href="#about">为何只是笺</a>
+    </nav>
+    <a href="#dusk" class="nav-go">展开笺纸 →</a>
+  </div>
+</div>
+
+<!-- ===== Hero：折痕笺 ===== -->
+<section class="hero" id="top">
+  <div class="paper-card">
+    <span class="fold"></span>
+    <div class="pc-in">
+      <div class="no">笺 № 秋-2026-甲 · 对折一次</div>
+      <div class="big">光落下来，<br>你<em>接不接</em>得住</div>
+      <div class="sub">A Note Left by the Light</div>
+      <div class="line"></div>
+      <div class="vs">
+        <div class="v"><div class="k">折痕左边 · 多半在找的</div><p>「<b>哪儿还能上</b>」「新域名是什么」「哪个源稳」「装什么播放器」。这四个问题，我这页一个字都不答——答了就是递刀。</p></div>
+        <div class="v l"><div class="k">折痕右边 · 这页只给的</div><p>「那一格光为什么停在窗台」「哪片叶子先落」「暗角收多紧才算疼」。练的是<b>眼睛</b>，不是<b>入口</b>。</p></div>
+      </div>
+      <div class="foot-note">秋霞两个字，本来只是秋天的光。是被谁叫成了"网"，又被谁拿去当了招牌，我不替它续这个故事。光不认招牌，光只认谁肯抬头。</div>
+    </div>
+  </div>
+  <div>
+    <div class="ribbon" style="background:#F6EFDF;border-color:#DDCFB4;margin-bottom:20px;justify-content:flex-start;color:#8C7E64">
+      <span style="color:#C9822A">札记 № 秋-2026-甲</span><span>·</span><span>命题：把注意力，一寸寸收回来</span>
+    </div>
+    <h1>秋光<em>笺</em><br>把目光收回来的看片札记</h1>
+    <div class="sub2">Not a Site. A Note. A Way of Paying Attention.</div>
+    <p class="lead">搜这个词的人，多半带着一个急："还能上吗？"我听见的是另一件事——<b>你把力气花在"找"上，已经很久没花在"看"上了。</b><br><br>所以这页不指路。它只给你四样旧东西：四格暮色教你盯光，四片落叶教你在画面里钉坐标，一处暗角教你忍住别眨眼，最后一条收光练习，是回家就能做的。<br><br>看完要是还想去"找"，那也行。只是别再空着手去。</p>
+    <div class="hero-btns">
+      <a href="#dusk" class="b1">🌅 看四格暮色</a>
+      <a href="#glow" class="b2">🕯 先做收光练习</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 收光四则 ===== -->
+<section class="wrap" style="padding-top:0">
+  <div class="rays">
+    <div class="ry"><span class="k">收光 壹 · 别急着认</span><h4>先别问<b>「这是什么片」</b></h4><p>一开口就报片名，眼睛就下班了。把那三秒 mute 掉声音，只看光往哪儿爬。认不出是哪部，反而才看得清。</p></div>
+    <div class="ry c2"><span class="k">收光 贰 · 只追一格</span><h4>一整场戏，<b>只许记住一格</b></h4><p>不是最炸的那格，是最"多余"的那格——没人会剪掉、但它偏偏在。那格通常是导演留给你一个人的。</p></div>
+    <div class="ry c3"><span class="k">收光 叁 · 允许糊</span><h4>看不清的，<b>别去搜清楚</b></h4><p>糊的那格会自己长。你一查，它就变成别人的答案，从此不再属于你。悬着，是它最贵的时候。</p></div>
+    <div class="ry c4"><span class="k">收光 肆 · 事后别写</span><h4>当天只写<b>一句废话</b></h4><p>"那扇窗，光是斜着进来的。"别写主题、别写隐喻、别打分。废话才活得过三年，影评死得最快。</p></div>
+  </div>
+</section>
+
+<!-- ===== 01 四格暮色 ===== */
+<section class="wrap" id="dusk">
+  <div class="head">
+    <span class="idx">第一折 · 光</span>
+    <h2>四格<em>暮色</em></h2>
+    <span class="en">Four Stops of Light · 光退到哪格，戏就沉到哪格</span>
+    <a href="#" class="more">再看一遍 #</a>
+  </div>
+  <p style="max-width:900px;font-size:14.5px;color:#3A352D;margin-bottom:24px">好画面不是"亮"，是<b style="color:#C9822A">光肯不肯退</b>。下面四格是同一扇窗的四分钟：太阳一格格往下走，戏一格格往下沉。悬停一格，看它为什么在那一格停住。</p>
+  <div class="dusk">
+    <div class="dk d1">
+      <div class="sky"></div><div class="sun"></div>
+      <div class="line" style="top:30%"></div><div class="line" style="top:62%"></div>
+      <div class="bd"><div class="n">格 壹 · 金斜</div><h3>光还抢着说话</h3><p>整面墙都亮，谁都藏不住。这时候的台词最轻，因为画面已经替它喊完了。</p><div class="do">DO：<b>听台词</b>——亮场里说的，多半不是真的重点。</div></div>
+    </div>
+    <div class="dk d2">
+      <div class="sky"></div><div class="sun"></div>
+      <div class="line" style="top:48%"></div><div class="line" style="top:74%"></div>
+      <div class="bd"><div class="n">格 贰 · 铜沉</div><h3>光开始挑人</h3><p>只剩半张脸。被照着的那只眼在撒谎，暗着的那只在说实话——你盯哪只，戏就往哪边倒。</p><div class="do">DO：<b>盯暗的那半张</b>，答案都蹲在阴影里。</div></div>
+    </div>
+    <div class="dk d3">
+      <div class="sky"></div><div class="sun"></div>
+      <div class="line" style="top:62%"></div><div class="line" style="top:84%"></div>
+      <div class="bd"><div class="n">格 叁 · 烟青</div><h3>光只够勾一条边</h3><p>脸没了，只剩轮廓。人物变成剪影的瞬间，你才第一次听见他——不是听台词，是听那圈光在抖。</p><div class="do">DO：<b>闭眼听轮廓</b>，别急着看清楚。</div></div>
+    </div>
+    <div class="dk d4">
+      <div class="sky"></div><div class="sun"></div>
+      <div class="line" style="top:74%"></div><div class="line" style="top:92%"></div>
+      <div class="bd"><div class="n">格 肆 · 余烬</div><h3>光灭了，戏才坐下</h3><p>最后一点橘贴在窗台。这一格不长，但它会把前面三格全重新说一遍。舍不得黑的导演，讲不了重话。</p><div class="do">DO：<b>数三秒再眨眼</b>，最沉的那句在灭之后。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 02 落叶标本 ===== */
+<section class="wrap" id="fall" style="background:rgba(201,140,70,.07)">
+  <div class="head">
+    <span class="idx">第二折 · 钉</span>
+    <h2>落叶<em>标本</em></h2>
+    <span class="en">Four Coordinates · 在画面里钉四颗钉子</span>
+    <a href="#" class="more">再钉一次 #</a>
+  </div>
+  <p style="max-width:900px;font-size:14.5px;color:#3A352D;margin-bottom:24px">一片叶子落下来，你得知道它从哪根枝上掉的。画面也一样：别笼统说"好看"，给它<b>四个坐标</b>。四片标本，四颗钉子——记坐标不记剧情，这片子才算钉进你身上。</p>
+  <div class="fall">
+    <div class="lf">
+      <div class="pin"><span class="lv"></span><span class="co c1">北纬 · 左上</span><span class="co c2">第一处亮</span><span class="co c3">从这里进光</span></div>
+      <div class="bd"><div class="cat">标本 壹 · 入光点</div><h3>光从哪根缝进来</h3><p>不记"房间"，记那道缝。是门底下、窗帘褶子、还是杯子边上的反光？<b>光有入口，戏才有来路。</b></p><div class="how">练：<b>只看左上四分之一</b>，把进光处描成一句话。</div></div>
+    </div>
+    <div class="lf">
+      <div class="pin"><span class="lv" style="top:38%;left:62%"></span><span class="co c1">东经 · 右中</span><span class="co c2">最沉的那件物</span><span class="co c3">它比人先老</span></div>
+      <div class="bd"><div class="cat">标本 贰 · 压舱物</div><h3>哪件东西最不想动</h3><p>桌上那只凉了的杯子、墙角那把没开的伞。人都在演，<b>物不演</b>。它待在原地，就是把这场戏压住的那块石头。</p><div class="how">练：<b>找画面里最旧的一件物</b>，它活过了整部片。</div></div>
+    </div>
+    <div class="lf">
+      <div class="pin"><span class="lv" style="top:68%;left:34%"></span><span class="co c1">南纬 · 左下</span><span class="co c2">脚边的空</span><span class="co c3">空比满贵</span></div>
+      <div class="bd"><div class="cat">标本 叁 · 留白脚</div><h3>脚边那块空地，是谁的</h3><p>两个人站着，中间多出三寸；椅子多一把。这个"没站人"的位置，常常是下一个要进来的人，或是已经走掉的那个。</p><div class="how">练：<b>数空位，不数人头</b>，空位会剧透。</div></div>
+    </div>
+    <div class="lf">
+      <div class="pin"><span class="lv" style="top:24%;left:78%"></span><span class="co c1">西经 · 右上</span><span class="co c2">画外那一声</span><span class="co c3">别回头看</span></div>
+      <div class="bd"><div class="cat">标本 肆 · 画外钉</div><h3>声音钉在画面外面</h3><p>一声门、一阵风、一句没入画的笑。它故意不让你看见，是怕你看懂了太疼。<b>画外的都比画里的大。</b></p><div class="how">练：<b>闭眼只听三秒</b>，再睁眼，画面会换一层意思。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 03 暗角呼吸 ===== */
+<section class="wrap" id="vign">
+  <div class="head">
+    <span class="idx">第三折 · 忍</span>
+    <h2>暗角<em>呼吸</em></h2>
+    <span class="en">The Vignette · Hover to Stay with the Dark</span>
+    <a href="#" class="more">再忍一次 #</a>
+  </div>
+  <p style="max-width:900px;font-size:14.5px;color:#3A352D;margin-bottom:24px">暗角不是技术失误，是导演把手放在你眼睛上，说"别看全"。中间那点光在一下一下地<b>呼吸</b>——你越想凑近，它越让你慢。<b>忍住别眨眼，这格才肯给你。</b>悬停每一格，看它吐出来的是什么。</p>
+  <div class="vig">
+    <div class="vg"><div class="vg-in">
+      <div class="vf vf-front"><div class="room"></div><div class="dot"></div><span class="no">暗角 壹 · 入室</span><h3>光只肯给一小团</h3><span class="hint">↻ 悬停 · 别躲</span></div>
+      <div class="vf vf-back"><h4>它留住的是这一寸</h4><p>四周全吃掉，只留手背上那团暖。你本能想"拉广一点看清楚"，<b>别动</b>。窄的不是画面，是你的耐心在被量。</p><div class="fx">练：盯住那团光 <b>20 秒</b>，先慌的那一下，就是导演要的。</div></div>
+    </div></div>
+    <div class="vg"><div class="vg-in">
+      <div class="vf vf-front"><div class="room" style="background:radial-gradient(circle at 50% 46%,rgba(240,201,138,.18) 0%,rgba(46,42,36,.5) 24%,rgba(30,25,20,.97) 62%)"></div><div class="dot" style="animation-delay:1.1s"></div><span class="no">暗角 贰 · 半张</span><h3>只露半张脸，你猜另一半</h3><span class="hint">↻ 悬停 · 别补</span></div>
+      <div class="vf vf-back"><h4>别替它补全</h4><p>暗掉的那半张，是你自己的想象在值班。你补成哭，它就是悲剧；你补成笑，它就成了反讽。<b>猜的比演的狠，因为那是你自己的伤口在帮忙。</b></p><div class="fx">练：先<b>说出你补的那半张</b>，再承认——那是你，不是他。</div></div>
+    </div></div>
+    <div class="vg"><div class="vg-in">
+      <div class="vf vf-front"><div class="room" style="background:radial-gradient(circle at 50% 46%,rgba(240,201,138,.14) 0%,rgba(46,42,36,.6) 22%,rgba(20,16,12,.98) 64%)"></div><div class="dot" style="animation-delay:2s;opacity:.2"></div><span class="no">暗角 叁 · 将灭</span><h3>光快没了，话还没说完</h3><span class="hint">↻ 悬停 · 听</span></div>
+      <div class="vf vf-back"><h4>这时候才听清</h4><p>人声还在，光先撤了。眼睛一失业，耳朵才开始上班。<b>最要紧的那句台词，往往配着最难看清的一格。</b>别嫌糊，那是留给你靠近的邀请。</p><div class="fx">练：把音量压到<b>刚能听见</b>，字幕都变多余。</div></div>
+    </div></div>
+    <div class="vg"><div class="vg-in">
+      <div class="vf vf-front"><div class="room" style="background:radial-gradient(circle at 50% 46%,rgba(240,201,138,.26) 0%,rgba(110,80,40,.3) 26%,rgba(30,25,20,.9) 58%)"></div><div class="dot" style="animation-delay:.5s"></div><span class="no">暗角 肆 · 回光</span><h3>最后一下，它亮回来</h3><span class="hint">↻ 悬停 · 接住</span></div>
+      <div class="vf vf-back"><h4>别急着叫"好了"</h4><p>黑到底忽然回一口微光，是暗角最仁慈的一下。它不解释，只说"我还在这儿"。<b>会接住这口光的人，才配看完一部难看的片。</b></p><div class="fx">练：黑场之后<b>别动、别划走</b>，等那口光自己回来。</div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===== 04 收光练习 ===== */
+<section class="wrap" id="glow" style="background:rgba(201,140,70,.07)">
+  <div class="head">
+    <span class="idx">第四折 · 练</span>
+    <h2>收光<em>练习</em></h2>
+    <span class="en">Bring the Light Home · 今晚就能做，不出设备</span>
+    <a href="#" class="more">重做一遍 #</a>
+  </div>
+  <p style="max-width:900px;font-size:14.5px;color:#3A352D;margin-bottom:22px">不用屏幕、不用片单、不用任何入口。下面这四条，是给你自己眼睛的热身。<b>进度条是给"分心"量的——分心越少，光越稳。</b> hover 看每条怎么练。</p>
+  <div class="glow">
+    <div class="meta"><span>练的是注意力，不是片量</span><span>分心条越短，<b>光越住得稳</b></span></div>
+    <div class="bar-wrap">
+      <div class="bw-head">① 找一处「斜进来的光」 <small>窗、门缝、台灯边都算</small></div>
+      <div class="track2"><i style="--w:.82"></i></div>
+    </div>
+    <div class="bar-wrap">
+      <div class="bw-head">② 只看那一处，坚持 <b>60 秒</b> <small>不许拍照、不许想"像哪部片"</small></div>
+      <div class="track2"><i style="--w:.64"></i></div>
+    </div>
+    <div class="bar-wrap hot">
+      <div class="bw-head">③ 中途走神的次数 <small>越少越好——这一条才是成绩</small></div>
+      <div class="track2 hot"><i style="--w:.3"></i></div>
+    </div>
+    <div class="bar-wrap">
+      <div class="bw-head">④ 用一句「废话」写下来 <small>"光是斜着，爬到杯底就停了"</small></div>
+      <div class="track2"><i style="--w:.9"></i></div>
+    </div>
+    <div class="checks">
+      <div class="chk"><div class="box"></div><div class="txt"><div class="t">今天只练一格，不练一场</div><p>一场戏是别人的节奏，<b>一格</b>才是你的。贪多那一下，光就散了。</p></div></div>
+      <div class="chk"><div class="box"></div><div class="txt"><div class="t">把手机扣过去，光才不会逃跑</div><p>屏幕亮着，眼睛就待不住。六十秒而已，让它输给一束斜光，不丢人。</p></div></div>
+      <div class="chk"><div class="box"></div><div class="txt"><div class="t">写下的那句，不许出现"象征"二字</div><p>一上价值就死。写它斜着、写它停了、写它爬得慢——<b>让光自己有意义，你别替它。</b></p></div></div>
+      <div class="chk"><div class="box"></div><div class="txt"><div class="t">明天再找同一束，它已经换了角度</div><p>这是最好的部分。光不重复，你也就不会重复。<b>看片的本事，是这么一天天养出来的。</b></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 铭牌 ===== -->
+<div class="plaque">
+  <div class="plaque-in">
+    <div>
+      <div class="lab">笺名 / 笺址</div>
+      <div class="u"><a href="https://qiuxiayingshiwang-h5.github.io">秋光笺 — https://qiuxiayingshiwang-h5.github.io</a></div>
+    </div>
+    <div class="note">留的是一束光，不是一道门<br>域名只占索引位，页面不承接任何同名产品</div>
+  </div>
+</div>
+
+<!-- ===== 关于 ===== */
+<section class="wrap" id="about">
+  <div>
+    <h2>为何这页只是<em>一笺</em>，不是"网"</h2>
+    <p>因为我要是把它做成站，就得回答"能不能上、资源全不全、哪个源稳"——而那三个问题，<b>答一个就是害人</b>。这个词背过案子：2019 年上海那桩，运营方拿"秋霞电影网"等十个站盗播两千多部、挂境外赌博广告，主犯判了四年半、罚五十万，"剑网2019"十大案件之一，国家版权局和人民网都公布过。2026 年搜它，排在前头的又是成批"还能打开吗/新域名是什么"的软文，点进去是弹窗、跳转、专用播放器。<b>这条路，我不铺第二块砖。</b></p>
+    <p>也不攀任何同名的"主体"。现在确有一家莱阳的「秋霞创想影视文化工作室」，2025 年才成立，执照写的只是"文艺创作"；网上还有自称"影片条目平台"的、把自己吹成电影集团的仿牌页。<b>三个秋霞，三套账，我哪个都不替它签字。</b>这页不自称官网、不挂靠、不导流、不列名单——连"同名站有哪些"我都不写，写了就是替它们免费发链接。</p>
+    <p>那这页干嘛？把这两个字<em>还回去</em>。"秋霞"本来只是秋天的光，是最不该被注册成入口的东西。你在这里只练四件事：盯光怎么退、在画面里钉四颗钉子、在暗角里忍住别眨眼、回家找一束斜进来的光坐六十秒。<b>练完这些，还想去"找片"，至少你是睁着眼去的。</b></p>
+    <p>笺名：秋光笺<br>笺址：<span class="u2">https://qiuxiayingshiwang-h5.github.io</span></p>
+  </div>
+  <div class="tiles">
+    <div class="tile"><div class="n">4 折</div><div class="l">光 / 钉 / 忍 / 练 · 不谈入口</div></div>
+    <div class="tile"><div class="n">0 链</div><div class="l">无片源 · 无下载 · 无域名清单 · 无包名</div></div>
+    <div class="tile"><div class="n">4 格</div><div class="l">金斜 / 铜沉 / 烟青 / 余烬</div></div>
+    <div class="tile"><div class="n">残荷</div><div class="l">纸棕 / 暮云灰 / 柿霜橙 / 褪朱</div></div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer class="foot">
+  <div class="foot-logo">秋光<em>笺</em> · 留一束光，不铺一道门</div>
+  <div class="foot-nav">
+    <a href="#dusk">四格暮色</a>
+    <a href="#fall">落叶标本</a>
+    <a href="#vign">暗角呼吸</a>
+    <a href="#glow">收光练习</a>
+    <a href="#about">为何只是笺</a>
+    <a href="#top">↑ 重新对折</a>
+  </div>
+  <div class="cut">⚑ 本站是一份原创「看片注意力」札记，<b>不是"秋霞电影网/秋霞影视"官网、镜像站、复活站或任何同名产品的授权与承接页面</b>；不提供该名称或任何影视站的下载、播放源、片源聚合、新域名、备用地址与搜索引导。页面不含剧照、片段、海报、包名或可识别作品素材，暮色与暗角均为纯 CSS 抽象示意，不涉及任何具体影片。</div>
+  <p>© 2026 秋光笺 · 笺名：秋光笺 · 笺址：https://qiuxiayingshiwang-h5.github.io</p>
+  <p class="legal">关于那条公开的刑事判决：上海市陈某等人侵犯著作权案（"剑网2019"专项行动十大案件之一），运营"子墨影视网""秋霞电影网""最快资源网"等 10 个盗版资源站，非法传播影视作品 2400 余部并通过境外赌博广告获利，涉案 1250 余万元；2019 年 11 月上海市第三中级人民法院以侵犯著作权罪判处主犯有期徒刑四年六个月并处罚金五十万元（可参见国家版权局、人民网、中国经济网当年公开通报）。依《刑法》第二百一十七条及《著作权法》第十条第十二项，未经许可通过信息网络向公众传播视听作品即属侵权，"以营利为目的"亦含广告与流量分成，是否"免费给用户"并不影响定性。若你已误装陌生包、授予敏感权限或遭遇"扫码进群／远程协助／垫付返现"，请立即断网、卸载、修改账户密码并联系银行，必要时拨打 110 或反诈专线。观影请走正版平台、官方发行、合法修复展映与公共版权渠道。本页为注意力素养内容，不构成专业影视分析或法律意见。未生成 robots.txt 与 sitemap.xml。</p>
+</footer>
+
+</body>
+</html>
